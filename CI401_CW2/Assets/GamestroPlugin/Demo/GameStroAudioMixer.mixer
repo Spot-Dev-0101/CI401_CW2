@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!241 &24100000
+AudioMixerController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GameStroAudioMixer
+  m_OutputGroup: {fileID: 0}
+  m_MasterGroup: {fileID: 24300002}
+  m_Snapshots:
+  - {fileID: 24500006}
+  m_StartSnapshot: {fileID: 24500006}
+  m_SuspendThreshold: -80
+  m_EnableSuspend: 1
+  m_UpdateMode: 0
+  m_ExposedParameters:
+  - guid: 15c2ac8cb7d974ff6bf7109534053ee1
+    name: Depth
+  - guid: b84ec1a68d9324353bb5bd9790d7577a
+    name: Power
+  - guid: 66ed278592a9943639818e42e25adda5
+    name: Momentum
+  m_AudioMixerGroupViews:
+  - guids:
+    - e4416800d4cd04773ac328089c09c29d
+    name: View
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: 24500006}
+--- !u!243 &24300002
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Master
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: e4416800d4cd04773ac328089c09c29d
+  m_Children: []
+  m_Volume: 97d7773d6bf0946238334d8bef08cf7b
+  m_Pitch: 89847c642c4da4edd97d561c621fcf9b
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 24400004}
+  - {fileID: 244605171910138914}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &24400004
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 792ad13da94f44fee848f1c164800130
+  m_EffectName: Attenuation
+  m_MixLevel: b4efa4fc461354ef19b8867e5b5567f7
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!245 &24500006
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snapshot
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 195ce5763fc42404aaafb00e1abd0270
+  m_FloatValues:
+    89847c642c4da4edd97d561c621fcf9b: 0.19
+    66ed278592a9943639818e42e25adda5: 0
+    b84ec1a68d9324353bb5bd9790d7577a: 0
+    15c2ac8cb7d974ff6bf7109534053ee1: 0.004
+  m_TransitionOverrides: {}
+--- !u!244 &244605171910138914
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 7e70a7fe0d153489fab9e1c06f8b31eb
+  m_EffectName: audioplugin_Gamestro
+  m_MixLevel: 4f7148892a3a242e3ae8b09528c830f3
+  m_Parameters:
+  - m_ParameterName: Momentum
+    m_GUID: 66ed278592a9943639818e42e25adda5
+  - m_ParameterName: Depth
+    m_GUID: 15c2ac8cb7d974ff6bf7109534053ee1
+  - m_ParameterName: Power
+    m_GUID: b84ec1a68d9324353bb5bd9790d7577a
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
