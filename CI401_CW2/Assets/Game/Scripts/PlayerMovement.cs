@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : CharacterBase
 {
-
-
     public float jumpForce = 1;
     [SerializeField]
     private float speedLimit = 8;
@@ -14,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     public CameraFollow cf;
     public AudioMixer audioMixer;
+    public Gun gun;
 
     
     private Rigidbody2D rb;
@@ -38,6 +37,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (slide == false)
+            {
+                rb.AddForce(-rb.velocity*2);
+            }
             spriteAnimator.setFrameSet("idle");
         }
 
@@ -58,10 +61,10 @@ public class PlayerMovement : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, groundAngle);
             if (groundAngle < 0)
             {
-                rb.AddForce(transform.right*2);
+                rb.AddForce(transform.right*10);
             } else if (groundAngle > 0)
             {
-                rb.AddForce(-transform.right*2);
+                rb.AddForce(-transform.right*10);
             }
             spriteAnimator.setFrameSet("slide");
         }
@@ -71,12 +74,20 @@ public class PlayerMovement : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
 
+        if (Input.GetButtonDown("Fire1"))
+        {
+            gun.shoot();
+        }
+
         audioMixer.SetFloat("Momentum", Mathf.Lerp(0.5f, 1, rb.velocity.magnitude/10));
         audioMixer.SetFloat("Power", Mathf.Lerp(0.5f, 1, rb.velocity.magnitude / 10));
         audioMixer.SetFloat("Depth", Mathf.Lerp(0, 0.3f, rb.velocity.magnitude / 10));
         cf.setTarget(transform.position, 0);
         cf.setTargetSize(5 + getGroundDist());
-        
+
+        Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        gun.lookAt(mouseWorldPosition);
+
     }
 
     private bool IsGrounded(){

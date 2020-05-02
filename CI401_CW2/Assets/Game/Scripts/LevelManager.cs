@@ -16,23 +16,33 @@ public class LevelManager : MonoBehaviour
 
     private GameObject player;
 
-    private List<GameObject> currentLevels = new List<GameObject>();
+    //private List<GameObject> currentLevels = new List<GameObject>();
+
+    private Level previousLevel;
+
+    private float totalLength = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
+        previousLevel = levels[0];
+        totalLength = levels[0].length;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        int playerPosIndex = Mathf.RoundToInt(player.transform.position.x / levels[0].length)+1;
-        if (playerPosIndex > currentLevels.Count)
+        
+        if (((player.transform.position.x - totalLength) + previousLevel.length) > 0)//(playerPosIndex > currentLevels.Count)
         {
-            Vector2 pos = new Vector2(levels[0].length * playerPosIndex, 0);
-            currentLevels.Add(Instantiate(levels[0].prefab, pos, Quaternion.identity));
+            int randomIndex = Random.Range(0, levels.Length);
+            
+            
+            Vector2 pos = new Vector2(totalLength, 0);
+            Instantiate(levels[randomIndex].prefab, pos, Quaternion.identity);
+            previousLevel = levels[randomIndex];
+            totalLength += levels[randomIndex].length;
         }
 
 
