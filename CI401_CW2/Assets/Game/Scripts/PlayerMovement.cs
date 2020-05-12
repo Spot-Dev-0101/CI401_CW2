@@ -90,6 +90,13 @@ public class PlayerMovement : CharacterBase
         Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         gun.lookAt(mouseWorldPosition);
 
+
+        if (health <= 0)
+        {
+            //Game over
+        }
+
+
     }
 
     private bool IsGrounded(){

@@ -311,7 +311,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980824657}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -774,9 +774,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e358c4db6b882ad4aac19da0b6155359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 3
   blood: {fileID: 2232691203145156067, guid: a0d7bf03ee460e942bcbf5e9902d3765, type: 3}
   gun: {fileID: 1458006519}
+  sm: {fileID: 0}
   triggeredDeath: 0
   jumpForce: 25
   speedLimit: 12
@@ -996,7 +997,7 @@ GameObject:
   - component: {fileID: 2005555136}
   - component: {fileID: 2005555137}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: ScoreManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1030,11 +1031,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 2103016839}
   multiText: {fileID: 980824659}
-  multiplier: 1
-  multiIncreaseDelay: 1
-  mutliCooldownDelay: 1
   scoreIncreaseSlide: 100
   scoreIncreaseJump: 15
+  scoreIncreaseEnemyKill: 10000
   pm: {fileID: 1334711959}
 --- !u!1 &2103016837
 GameObject:

@@ -12,12 +12,12 @@ public class Gun : MonoBehaviour
 
     public float bulletSpeed = 5;
 
-    GameObject player;
+    GameObject parent;
     private Queue<GameObject> bullets = new Queue<GameObject>();
 
     void Start()
     {
-        player = transform.parent.gameObject;
+        parent = transform.parent.gameObject;
 
         //Having to instantiate a new bullet each time the player shoots is slow
         //so creating a pool when the game starts helps with this.
@@ -57,7 +57,7 @@ public class Gun : MonoBehaviour
         bullet.transform.position = gunPointer.transform.position;
         bullet.transform.eulerAngles = transform.eulerAngles;
         Rigidbody2D bulletRB = bullet.GetComponent<Rigidbody2D>(); // this is slow, but I cannot think of a better way at the moment
-        bulletRB.velocity = player.GetComponent<Rigidbody2D>().velocity;
+        bulletRB.velocity = parent.GetComponent<Rigidbody2D>().velocity;
         bulletRB.AddForce((transform.up * bulletSpeed)*100);
         bullets.Enqueue(bullet); 
     }

@@ -10,14 +10,16 @@ public class CharacterBase : MonoBehaviour
     public ParticleSystem blood;
 
     public Gun gun;
+    
+    public ScoreManager sm;
 
     [HideInInspector]
     public bool triggeredDeath = false;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
-        
+        sm = GameObject.FindObjectOfType<ScoreManager>();
     }
 
     // Update is called once per frame
