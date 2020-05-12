@@ -5,19 +5,21 @@ using UnityEngine.Audio;
 
 public class PlayerMovement : CharacterBase
 {
-    public float jumpForce = 1;
+    [SerializeField]
+    private float jumpForce = 1;
     [SerializeField]
     private float speedLimit = 8;
     public bool slide = false;
 
     public CameraFollow cf;
     public AudioMixer audioMixer;
-    public Gun gun;
 
     
-    private Rigidbody2D rb;
+    public  Rigidbody2D rb;
     private Collider2D collider;
     private SpriteAnimator spriteAnimator;
+
+    public bool grounded = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -94,7 +96,8 @@ public class PlayerMovement : CharacterBase
         
         Vector2 left = new Vector2(transform.position.x-0.45f, transform.position.y);
         Vector2 right = new Vector2(transform.position.x+0.45f, transform.position.y);
-        return Physics2D.Raycast(transform.position, -Vector3.up, collider.bounds.extents.y + 0.1f) || Physics2D.Raycast(left, -Vector3.up, collider.bounds.extents.y + 0.1f) || Physics2D.Raycast(right, -Vector3.up, collider.bounds.extents.y + 0.1f);
+        grounded = Physics2D.Raycast(transform.position, -Vector3.up, collider.bounds.extents.y + 0.1f) || Physics2D.Raycast(left, -Vector3.up, collider.bounds.extents.y + 0.1f) || Physics2D.Raycast(right, -Vector3.up, collider.bounds.extents.y + 0.1f);
+        return grounded;
         //Collider2D[] hits = new Collider2D[1];
         //collider.OverlapCollider(new ContactFilter2D().NoFilter(), hits);
         //if (hits[0] != null)
@@ -108,7 +111,7 @@ public class PlayerMovement : CharacterBase
 
     }
 
-    private float getGroundDist()
+    public float getGroundDist()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector3.up, collider.bounds.extents.y + 25);
         if (hit)

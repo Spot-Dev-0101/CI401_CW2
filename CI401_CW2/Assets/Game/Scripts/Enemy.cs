@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Enemy : CharacterBase
 {
-
-    public ParticleSystem blood;
-
-    public Gun gun;
-
+    
     private GameObject player;
-    private float shootDistance = 5;
+    public float shootDistance = 5;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,18 +17,19 @@ public class Enemy : CharacterBase
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) < shootDistance)
+        if (triggeredDeath == false)
         {
-            gun.lookAt(player.transform.position);
+            if (Vector2.Distance(transform.position, player.transform.position) < shootDistance)
+            {
+                gun.lookAt(player.transform.position);
+            }
+            if (health <= 0)
+            {
+                die();
+            }
         }
-        
     }
 
-    public void die()
-    {
-        blood.Play();
-        gun.destroyAllBullets();
-        Destroy(this.gameObject, 3);
-    }
+    
     
 }

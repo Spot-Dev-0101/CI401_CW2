@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
             transform.position = new Vector3(-9999, -9999, 0);
             if (collision.gameObject.tag == "Enemy")
             {
-                collision.gameObject.GetComponent<Enemy>().die();
+                collision.gameObject.GetComponent<Enemy>().damage(1);
             }
         }
     }

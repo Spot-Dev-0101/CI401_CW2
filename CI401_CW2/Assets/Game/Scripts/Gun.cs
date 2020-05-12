@@ -23,7 +23,8 @@ public class Gun : MonoBehaviour
         //so creating a pool when the game starts helps with this.
         for (int i = 0; i < bulletPoolSize; i++)
         {
-            bullets.Enqueue(Instantiate(bulletPrefab, new Vector3(-9999, -9999, 0), Quaternion.identity));
+            GameObject newBullet = Instantiate(bulletPrefab, new Vector3(-9999, -9999, 0), Quaternion.identity);
+            bullets.Enqueue(newBullet);
         }
     }
 

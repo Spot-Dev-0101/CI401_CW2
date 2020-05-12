@@ -11,7 +11,7 @@ public class Level
 
 public class LevelManager : MonoBehaviour
 {
-
+    public int maxLoadedLevels = 5;
     public Level[] levels;
 
     private GameObject player;
@@ -21,6 +21,8 @@ public class LevelManager : MonoBehaviour
     private Level previousLevel;
 
     private float totalLength = 0;
+
+    private Queue<GameObject> spawnedLevels = new Queue<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -40,11 +42,30 @@ public class LevelManager : MonoBehaviour
             
             
             Vector2 pos = new Vector2(totalLength, 0);
-            Instantiate(levels[randomIndex].prefab, pos, Quaternion.identity);
+            GameObject newLevel = Instantiate(levels[randomIndex].prefab, pos, Quaternion.identity);
             previousLevel = levels[randomIndex];
             totalLength += levels[randomIndex].length;
+            spawnedLevels.Enqueue(newLevel);
+            if (spawnedLevels.Count > maxLoadedLevels)
+            {
+                GameObject levelToDelete = spawnedLevels.Dequeue();
+                destroyLevel(levelToDelete);
+            }
+            
         }
 
 
+    }
+
+    private void destroyLevel(GameObject level)
+    {
+        for (int x = 0; x < level.transform.childCount; x++)
+        {
+            if (level.transform.GetChild(x).tag == "Enemy")
+            {
+                level.transform.GetChild(x).GetComponent<Enemy>().gun.destroyAllBullets();
+            }
+        }
+        Destroy(level);
     }
 }
