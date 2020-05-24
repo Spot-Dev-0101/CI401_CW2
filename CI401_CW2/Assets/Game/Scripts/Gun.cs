@@ -28,16 +28,8 @@ public class Gun : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-        
-    }
-
     public void lookAt(Vector2 pos)
     {
-        //Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (pos - (Vector2)transform.position).normalized;
         transform.up = direction;
     }

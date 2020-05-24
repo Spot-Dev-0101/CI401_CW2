@@ -11,27 +11,29 @@ public class CharacterBase : MonoBehaviour
 
     public Gun gun;
     
-    public ScoreManager sm;
+    protected private ScoreManager sm;
 
     [HideInInspector]
     public bool triggeredDeath = false;
+    
+    protected private GM gm;
 
     // Start is called before the first frame update
     protected void Start()
     {
         sm = GameObject.FindObjectOfType<ScoreManager>();
+        gm = GameObject.FindObjectOfType<GM>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
     public void damage(int amount)
     {
         blood.Play();
         health -= amount;
+        if (health <= 0)
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
     }
 
     public void die()

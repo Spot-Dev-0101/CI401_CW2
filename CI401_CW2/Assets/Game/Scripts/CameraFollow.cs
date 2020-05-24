@@ -56,6 +56,5 @@ public class CameraFollow : MonoBehaviour
         {
             targetSize = size;
         }
-        
     }
 }

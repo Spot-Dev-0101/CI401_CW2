@@ -14,6 +14,7 @@ public class Enemy : CharacterBase
 
     private float timer = 0;
     
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,7 @@ public class Enemy : CharacterBase
     // Update is called once per frame
     void Update()
     {
-        if (triggeredDeath == false)
+        if (triggeredDeath == false && gm.isGameOver == false)
         {
             if (Vector2.Distance(transform.position, player.transform.position) < shootDistance)
             {
@@ -35,6 +36,7 @@ public class Enemy : CharacterBase
             if (health <= 0)
             {
                 die();
+                sm.multiplier = 2;
                 sm.score += (int)(sm.scoreIncreaseEnemyKill*sm.multiplier);
             }
 
@@ -47,7 +49,5 @@ public class Enemy : CharacterBase
             }
         }
     }
-
-    
     
 }

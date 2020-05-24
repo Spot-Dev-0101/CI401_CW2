@@ -28,12 +28,12 @@ public class ScoreManager : MonoBehaviour
         get { return m_multiplier; }
         set
         {
-            if (value >= 1) {
+            if (value >= minMultiplier) {
                 m_multiplier = value;
             }
             else
             {
-                m_multiplier = 1;
+                m_multiplier = minMultiplier;
             }
             if (m_multiplier > maxMultiplier)
             {
@@ -45,39 +45,46 @@ public class ScoreManager : MonoBehaviour
         }
     }
     
-
+    
     public int scoreIncreaseSlide = 100;
     public int scoreIncreaseJump = 15;
     public int scoreIncreaseEnemyKill = 10000;
+    public int scoreIncreaseDefault = 10;
 
     public float maxMultiplier = 15;
+    public float minMultiplier = -2;
 
     public PlayerMovement pm;
+    private GM gm;
 
     // Start is called before the first frame update
     void Start()
     {
         score = 0;
         multiplier = 1;
+        gm = GameObject.FindObjectOfType<GM>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pm.slide == true && pm.grounded == true && pm.rb.velocity.magnitude > 5)
+        if (gm.isGameOver == false)
         {
-            score += (int)(scoreIncreaseSlide * multiplier);
-            multiplier += 0.1f;
-        } else if (pm.slide == false && pm.grounded == false && pm.getGroundDist() > 3.5)
-        {
-            score += (int)(scoreIncreaseJump * multiplier);
-            multiplier += 0.1f;
-        }
-        else
-        {
-            multiplier += -0.05f;
+            if (pm.slide == true && pm.grounded == true && pm.rb.velocity.magnitude > 5)
+            {
+                score += (int)(scoreIncreaseSlide * multiplier);
+                multiplier += 0.1f;
+            }
+            else if (pm.slide == false && pm.grounded == false && pm.getGroundDist() > 3.5)
+            {
+                score += (int)(scoreIncreaseJump * multiplier);
+                multiplier += 0.1f;
+            }
+            else
+            {
+                score += (int)(scoreIncreaseDefault * multiplier);
+                multiplier += -0.05f;
+            }
         }
     }
-
-    
 }

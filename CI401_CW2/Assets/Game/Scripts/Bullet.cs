@@ -14,21 +14,17 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         c = GetComponent<Collider2D>();
     }
+    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "IgnoreBullet")
         {
             rb.velocity = Vector2.zero;
             transform.position = new Vector3(-9999, -9999, 0);
-            if (collision.gameObject.tag == "Enemy")
+            if (collision.gameObject.GetComponent<CharacterBase>())
             {
-                collision.gameObject.GetComponent<Enemy>().damage(1);
+                collision.gameObject.GetComponent<CharacterBase>().damage(1);
             }
         }
     }
